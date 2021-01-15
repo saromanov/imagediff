@@ -3,8 +3,8 @@ use std::path::Path;
 use std::ffi::OsStr;
 
 
-fn load_image(path:&str) {
-    validate_extension(path);
+fn load_image(path:&str) -> Result<bool, &str>{
+    let extension = validate_extension(path)?;
     //let img = ImageReader::open(path)?.decode()?;
 
 }
@@ -21,6 +21,6 @@ fn validate_extension(path: &str) -> Result<bool, &str> {
 }
 
 fn main() {
-    load_image("/home/motorcode/git_playbook.yml");
+    load_image("playbook.jpg");
     println!("Hello, world!");
 }
