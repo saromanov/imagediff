@@ -1,10 +1,11 @@
 use image::io::Reader as ImageReader;
+use image::{ImageError, DynamicImage};
 use std::path::Path;
 use std::ffi::OsStr;
 use std::env;
 
 
-fn load_image(path:&str) -> Result<image::DynamicImage,image::ImageError> {
+fn load_image(path:&str) -> Result<DynamicImage,ImageError> {
     let extension = validate_extension(path);
     ImageReader::open(path)?.decode()
 }
