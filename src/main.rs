@@ -4,7 +4,7 @@ use std::ffi::OsStr;
 use std::env;
 
 
-fn load_image(path:&str) {
+fn load_image(path:&str) -> Result<image::DynamicImage,image::ImageError> {
     let extension = validate_extension(path);
     ImageReader::open(path)?.decode()
 }
@@ -21,7 +21,8 @@ fn validate_extension(path: &str) -> Result<bool, &str> {
 }
 
 fn diff(first_image: &str, second_image: &str) {
-
+    let img1 = load_image(first_image);
+    let img2 = load_image(second_image);
 }
 
 fn main() {
@@ -31,6 +32,5 @@ fn main() {
     }
     let first_image = &args[1];
     let second_image = &args[2];
-    diff(first_image, second_image)
-    println!("{}", &args[1]);
+    diff(first_image, second_image);
 }
