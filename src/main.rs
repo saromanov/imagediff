@@ -22,8 +22,15 @@ fn validate_extension(path: &str) -> Result<bool, &str> {
 }
 
 fn diff(first_image: &str, second_image: &str) {
-    let img1 = load_image(first_image);
-    let img2 = load_image(second_image);
+    let img1 = load_image(first_image).unwrap();
+    let img2 = load_image(second_image).unwrap();
+   /* if img1.into_bytes().len() != img2.into_bytes().len() {
+        println!("size of the images is not equal")
+    }*/
+    let mut img1_data = img1.into_bytes();
+    let mut img2_data = img2.into_bytes();
+    let diff_count = img1_data.iter().zip(img2_data.iter()).filter(|&(a, b)| a != b).count();
+    println!("{}", diff_count)
 }
 
 fn main() {
