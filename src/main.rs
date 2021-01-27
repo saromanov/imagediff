@@ -25,7 +25,7 @@ fn diff(first_image: &str, second_image: &str) {
     let mut img1 = load_image(first_image).unwrap().into_bytes();
     let mut img2 = load_image(second_image).unwrap().into_bytes();
     compare_images(&img1, &img2);
-    let diff_count = img1.iter().zip(img2.iter()).filter(|&(a, b)| a != b).count();
+    let count = diff_count(img1, img2);
     println!("{}", diff_count)
 }
 
@@ -33,6 +33,10 @@ fn compare_images<T>(img1: &Vec<T>, img2: &Vec<T>){
     if img1.len() != img2.len() {
         println!("size of the images is not equal")
     }
+}
+
+fn diff_count<T>(img1:&Vec<T>, img2: &Vec<T>) -> u32 {
+    img1.iter().zip(img2.iter()).filter(|&(a, b)| a != b).count()
 }
 
 fn main() {
